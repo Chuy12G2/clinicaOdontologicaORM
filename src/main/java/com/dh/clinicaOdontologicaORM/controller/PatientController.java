@@ -1,0 +1,33 @@
+package com.dh.clinicaOdontologicaORM.controller;
+
+import com.dh.clinicaOdontologicaORM.entities.Patient;
+import com.dh.clinicaOdontologicaORM.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/patient")
+public class PatientController {
+
+    private final PatientService patientService;
+
+    @Autowired
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
+    }
+
+    @PostMapping
+    public Patient save(@RequestBody Patient patient) {
+        return patientService.save(patient);
+    }
+
+    @RequestMapping
+    public List<Patient> findAll() {
+        return patientService.findAll();
+    }
+}
